@@ -15,6 +15,14 @@ class CreateOdecasTable extends Migration
     {
         Schema::create('odecas', function (Blueprint $table) {
             $table->id();
+            $table->string('naziv');
+            $table->string('opis');
+            $table->string('proizvedenoU'); 
+            $table->string('velicina');
+            $table->foreignId('kategorija_id');
+
+            
+            
             $table->timestamps();
         });
     }

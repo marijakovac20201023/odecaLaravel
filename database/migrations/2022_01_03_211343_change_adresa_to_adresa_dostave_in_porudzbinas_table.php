@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePorudzbinasTable extends Migration
+class ChangeAdresaToAdresaDostaveInPorudzbinasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,8 @@ class CreatePorudzbinasTable extends Migration
      */
     public function up()
     {
-        Schema::create('porudzbinas', function (Blueprint $table) {
-            $table->id();
-            $table->string('adresa');
-            $table->double('cena');
-            $table->string('status');
-
-
-
-            $table->timestamps();
+        Schema::table('porudzbinas', function (Blueprint $table) {
+            $table->renameColumn('adresa', 'adresaDostave');
         });
     }
 
@@ -32,6 +25,8 @@ class CreatePorudzbinasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('porudzbinas');
+        Schema::table('porudzbinas', function (Blueprint $table) {
+            $table->renameColumn('adresaDostave', 'adresa'); 
+        });
     }
 }
