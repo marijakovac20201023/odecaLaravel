@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Racun extends Model
 {
     use HasFactory;
+
+  
+
 }

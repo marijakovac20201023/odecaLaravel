@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Kategorija extends Model
 {
     use HasFactory;
+
+
+    protected $fillable = [
+        'nazivKategorije'
+    ];
+    public function odeca()
+    {
+       return $this->hasMany(Odeca::class); //u jednu kategoriju spada vise odeca 
+    }
 }
