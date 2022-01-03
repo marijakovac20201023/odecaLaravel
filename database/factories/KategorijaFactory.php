@@ -14,7 +14,7 @@ class KategorijaFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'naziv' => $this->faker->randomElement($array = array (  'za muskarce','za zene','za decu')) 
         ];
     }
 }

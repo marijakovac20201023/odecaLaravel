@@ -18,6 +18,9 @@ class CreatePorudzbinasTable extends Migration
             $table->string('adresa');
             $table->double('cena');
             $table->string('status');
+            $table->foreignId('user_id');
+            $table->foreignId('odeca_id');
+
 
 
 
