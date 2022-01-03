@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Odeca;
 use Illuminate\Database\Seeder;
 
 class OdecaSeeder extends Seeder
@@ -13,6 +14,6 @@ class OdecaSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Odeca::factory(15)->create();
     }
 }
