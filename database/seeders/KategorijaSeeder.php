@@ -14,6 +14,24 @@ class KategorijaSeeder extends Seeder
      */
     public function run()
     {
-         //Kategorija::factory(3)->create();
+        $k1 = new Kategorija();
+        $k1->naziv="za muskarce";
+        $k1->save();
+  
+        $k2 = new Kategorija();
+        $k2->naziv="za zene";
+        $k2->save();
+
+
+        $k3 = new Kategorija();
+        $k3->naziv="za decu";
+        $k3->save();
+
+        $k4 = new Kategorija();
+        $k4->naziv="ostalo";
+        $k4->save();
+
+
+
     }
 }

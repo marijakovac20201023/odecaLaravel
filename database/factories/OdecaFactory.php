@@ -19,7 +19,7 @@ class OdecaFactory extends Factory
             'opis' => $this->faker->sentence($nbWords = 6, $variableNbWords = true),
             'proizvedenoU'=>$this->faker->country(),
             'velicina' => $this->faker->randomElement($array = array ('s','m','l','xs','xl','xxl','xxl','10','14','12')),
-            'kategorija_id'=> Kategorija::factory()
+            'kategorija_id'=> Kategorija::find(random_int(1,Kategorija::count()))
 
 
         ];

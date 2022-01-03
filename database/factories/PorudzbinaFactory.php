@@ -19,8 +19,8 @@ class PorudzbinaFactory extends Factory
             'adresaDostave'=>$this->faker->address(),
             'cena'=>$this->faker->numberBetween($min = 500, $max = 9000),
             'status' => $this->faker->randomElement($array = array (  'u pripremi','isporuceno','neisporuceno')),
-            'user_id'=> User::factory(),
-            'odeca_id'=> Odeca::factory()
+            'user_id'=>User::find(random_int(1,User::count())),
+            'odeca_id'=> Odeca::find(random_int(1,Odeca::count()))
 
 
         ];
