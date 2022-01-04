@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Resources\PorudzbinaResource;
 use App\Models\Porudzbina;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PorudzbinaController extends Controller
 {
@@ -35,9 +37,28 @@ class PorudzbinaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) //cuva objekte u bazi pozivanjem post metode
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'adresaDostave' => 'required|string|max:100',
+            'cena' => 'required',
+            'status' => 'required|string', 
+            'odeca_id' => 'required'
+            //polje user_id ne stavljamo u validator jer ce to zapravo biti id ulogovanog korisnika jer je on kreirao porudzbinu
+        ]);
+
+        if ($validator->fails()) 
+            return response()->json($validator->errors());
+        $p = Porudzbina::create([
+            'adresaDostave' => $request->adresaDostave, 
+            'cena' => $request->cena, 
+            'status' => $request->status,
+            'odeca_id' => $request->odeca_id, 
+           
+            'user_id' => Auth::user()->id
+        ]);
+
+        return response()->json(['Porudzbina uspesno kreirana!', new PorudzbinaResource($p)]);
     }
 
     /**
@@ -69,9 +90,30 @@ class PorudzbinaController extends Controller
      * @param  \App\Models\Porudzbina  $porudzbina
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Porudzbina $porudzbina)
+    public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'adresaDostave' => 'required|string|max:100',
+            'cena' => 'required',
+            'status' => 'required|string', 
+            'odeca_id' => 'required'
+            //polje user_id ne stavljamo u validator jer ce to zapravo biti id ulogovanog korisnika jer je on kreirao porudzbinu
+        ]);
+
+        $p =  Porudzbina::find($id);
+        if($p){
+            $p->adresaDostave = $request->adresaDostave;
+            $p->cena = $request->cena;
+            $p->status = $request->status;
+            $p->odeca_id = $request->odeca_id;
+            $p->save();
+            return response()->json(['Porudzbina uspesno izmenjena!', new PorudzbinaResource($p)]);
+
+        }else{
+            return response()->json('Ne postoji trazena porudzbina!');
+
+        }
+
     }
 
     /**
