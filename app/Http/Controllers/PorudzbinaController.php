@@ -80,8 +80,14 @@ class PorudzbinaController extends Controller
      * @param  \App\Models\Porudzbina  $porudzbina
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Porudzbina $porudzbina)
+    public function destroy($id)
     {
-        //
+       $p = Porudzbina::find($id);
+       if($p){
+           $p->delete();
+           return response()->json(['Porudzbina je obrisana!',new PorudzbinaResource($p)]);
+       }else{
+           return response()->json('Trazena porudzbina ne postoji u bazi!');
+       }
     }
 }

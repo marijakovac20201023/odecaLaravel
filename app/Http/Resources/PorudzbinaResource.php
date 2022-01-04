@@ -14,9 +14,11 @@ class PorudzbinaResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
+    public static $wrap='porudzbina';
     public function toArray($request)
     {
         return [
+            'id'=>$this->resource->id,
             'adresa' => $this->resource->adresaDostave,
             'cena' => $this->resource->cena,
             'status' => $this->resource->status,
