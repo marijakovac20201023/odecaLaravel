@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\OdecaController;
+use App\Http\Controllers\PorudzbinaController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +20,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('users',[UserController::class,'index']);
+Route::get('users/{id}',[UserController::class,'show']);
+
+Route::get('odeca',[OdecaController::class,'index']);
+Route::get('odeca/{id}',[OdecaController::class,'show']);
+
+Route::get('porudzbine',[PorudzbinaController::class,'index']);
+Route::get('porudzbine/{id}',[PorudzbinaController::class,'show']);
