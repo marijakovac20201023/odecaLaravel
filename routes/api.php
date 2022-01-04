@@ -21,6 +21,21 @@ use Illuminate\Support\Facades\Route;
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
+
+
+
+Route::group(['middleware' => ['auth:sanctum']], function () {//ako je korisnik ulogovan moze da vrsi operacije dodavanja, azuriranja i brisanja
+    Route::get('/profiles', function (Request $request) { //ovo nam omogucava da prikazemo ulogovanog korisnika
+        return auth()->user();
+    });
+  //  Route::delete('porudzbine/{id}',[PorudzbinaController::class,'destroy']);
+    Route::resource('porudzbine', PorudzbinaController::class)->only(['update', 'store', 'destroy']);
+    Route::resource('odeca', OdecaController::class)->only(['update', 'store', 'destroy']);
+   
+
+    Route::post('/logout', [AuthController::class, 'logout']); //ako je korisnik ulogovan moze da se odjavi
+});
+//metode koje mogu da vide svi korisnici
 Route::get('users',[UserController::class,'index']);
 Route::get('users/{id}',[UserController::class,'show']);
 
@@ -29,14 +44,3 @@ Route::get('odeca/{id}',[OdecaController::class,'show']);
 
 Route::get('porudzbine',[PorudzbinaController::class,'index']);
 Route::get('porudzbine/{id}',[PorudzbinaController::class,'show']);
-
-
-Route::group(['middleware' => ['auth:sanctum']], function () {
-    Route::get('/profiles', function (Request $request) { //ovo nam omogucava da prikazemo ulogovanog korisnika
-        return auth()->user();
-    });
-    Route::delete('porudzbine/{id}',[PorudzbinaController::class,'destroy']);
-
-
-    Route::post('/logout', [AuthController::class, 'logout']); //ako je korisnik ulogovan moze da se odjavi
-});
