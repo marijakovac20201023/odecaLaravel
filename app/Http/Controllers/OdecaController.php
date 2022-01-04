@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\OdecaResource;
 use App\Models\Odeca;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class OdecaController extends Controller
      */
     public function index()
     {
-        return Odeca::all();
+        $odeca =Odeca::all();
+        return OdecaResource::collection($odeca);
     }
 
     /**
@@ -46,7 +48,7 @@ class OdecaController extends Controller
      */
     public function show($id)
     {
-        return Odeca::find($id);
+        return new OdecaResource(Odeca::find($id));
     }
 
     /**
