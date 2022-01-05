@@ -57,7 +57,7 @@ class PorudzbinaController extends Controller
            
             'user_id' => Auth::user()->id
         ]);
-
+        $p->save();
         return response()->json(['Porudzbina uspesno kreirana!', new PorudzbinaResource($p)]);
     }
 

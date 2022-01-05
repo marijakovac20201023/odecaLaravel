@@ -30,7 +30,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {//ako je korisnik 
     });
   //  Route::delete('porudzbine/{id}',[PorudzbinaController::class,'destroy']);
     Route::resource('porudzbine', PorudzbinaController::class)->only(['update', 'store', 'destroy']);
-    Route::resource('odeca', OdecaController::class)->only(['update', 'store', 'destroy']);
+    
    
 
     Route::post('/logout', [AuthController::class, 'logout']); //ako je korisnik ulogovan moze da se odjavi
