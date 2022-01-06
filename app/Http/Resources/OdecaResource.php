@@ -13,6 +13,7 @@ class OdecaResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
+    public static $wrap='odeca';
     public function toArray($request)
     {
         return [

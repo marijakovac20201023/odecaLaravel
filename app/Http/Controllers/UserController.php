@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -16,6 +17,7 @@ class UserController extends Controller
     public function index()
     {
         $users=User::all();
+     //   return $users;
         return  UserResource::collection($users);
     }
 
@@ -37,7 +39,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
     }
 
     /**
@@ -48,6 +50,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        //return User::find($id);
         return new UserResource(User::find($id));
     }
 

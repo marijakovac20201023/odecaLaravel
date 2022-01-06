@@ -15,7 +15,7 @@ class KategorijaResource extends JsonResource
     public static $wrap = 'kategorija';
     public function toArray($request)
     {
-        return parent::toArray($request); return [
+       return [
             'id' => $this->resource->id,
             'naziv' => $this->resource->naziv
 
